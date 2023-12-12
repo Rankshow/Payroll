@@ -14,5 +14,6 @@ namespace PayrollManagementSys.Model
         public string? Username { get; set; }
         public string? Password { get; set;}
         public string? Address { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
     }
 }
