@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace PayrollManagementSys.Model
 {
     public class Payment
@@ -11,5 +6,6 @@ namespace PayrollManagementSys.Model
         public Guid EmployeeId { get; set; }
         public DateTime Date { get; set; }
         public string? Description { get; set; }
+        public ICollection<Payroll>? Payrolls { get; set; }
     }
 }

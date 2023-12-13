@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayrollManagementSys.Data;
 
@@ -11,9 +12,10 @@ using PayrollManagementSys.Data;
 namespace PayrollManagementSys.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231213010343_AddedSalary")]
+    partial class AddedSalary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,31 +69,6 @@ namespace PayrollManagementSys.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("PayrollManagementSys.Model.Payroll", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("Payrolls");
-                });
-
             modelBuilder.Entity("PayrollManagementSys.Model.Salary", b =>
                 {
                     b.Property<Guid>("Id")
@@ -115,8 +92,6 @@ namespace PayrollManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("Salaries");
                 });
 
@@ -129,34 +104,9 @@ namespace PayrollManagementSys.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PayrollManagementSys.Model.Payroll", b =>
-                {
-                    b.HasOne("PayrollManagementSys.Model.Payment", null)
-                        .WithMany("Payrolls")
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PayrollManagementSys.Model.Salary", b =>
-                {
-                    b.HasOne("PayrollManagementSys.Model.Employee", null)
-                        .WithMany("Salaries")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PayrollManagementSys.Model.Employee", b =>
                 {
                     b.Navigation("Payments");
-
-                    b.Navigation("Salaries");
-                });
-
-            modelBuilder.Entity("PayrollManagementSys.Model.Payment", b =>
-                {
-                    b.Navigation("Payrolls");
                 });
 #pragma warning restore 612, 618
         }

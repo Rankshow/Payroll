@@ -15,6 +15,8 @@ namespace PayrollManagementSys.Data
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        
+        public DbSet<Salary> Salaries { get; set; }
+        public DbSet<Payroll> Payrolls { get; set; }
+
     }
 }
